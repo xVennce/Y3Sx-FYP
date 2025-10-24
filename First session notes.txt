@@ -1,0 +1,12 @@
+indepth research about difficulty in cozy games
+	- reduce scope, too many questions
+Gantt chart
+	- "Waterfall" method
+Kanban board
+	- Look into jira rather than trello
+
+plan
+	- things fine
+	- questions are fine
+	- a lot of things, reduce
+	- RESEARCH!!!
