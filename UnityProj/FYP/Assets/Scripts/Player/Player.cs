@@ -48,11 +48,12 @@ public class Player : MonoBehaviour,
 
     #region Player Inputs
     public void OnInteract(InputAction.CallbackContext context) {
-        throw new System.NotImplementedException();
+        Debug.Log("Interact Called");
     }
 
     public void OnJump(InputAction.CallbackContext context) {
         if (context.performed) {
+            Debug.Log("Jump Called");
             jumpQueued = true;
         }
     }
@@ -61,8 +62,10 @@ public class Player : MonoBehaviour,
     }
 
     public void OnMouseClick(InputAction.CallbackContext context) {
+        if (context.performed) {
+            Debug.Log("Click Called");
+        }
     }
-
     public void OnMove(InputAction.CallbackContext context) {
         moveInput = context.ReadValue<Vector2>();
     }
