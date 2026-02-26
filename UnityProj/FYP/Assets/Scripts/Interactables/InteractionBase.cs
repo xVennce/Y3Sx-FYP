@@ -29,7 +29,7 @@ public abstract class InteractionBase : MonoBehaviour {
         }
     }
     protected void GetInventoryReference() {
-        GameObject temp = GameObject.Find("Player Inventory Tracker");
+        GameObject temp = GameObject.Find("Player Tracker");
         if (temp != null) {
             inventory = temp.GetComponent<PlayerInventory>();
         }
