@@ -102,13 +102,11 @@ public class Player : MonoBehaviour,
     #region Player Inputs
     public void OnInteract(InputAction.CallbackContext context) {
         if (context.performed) {
-            Debug.Log("Interact Called");
             OnInteractPressed?.Invoke();
         }
     }
     public void OnJump(InputAction.CallbackContext context) {
         if (context.performed) {
-            Debug.Log("Jump Called");
             HandleJump();
         }
     }
@@ -117,7 +115,6 @@ public class Player : MonoBehaviour,
 
     public void OnMouseClick(InputAction.CallbackContext context) {
         if (context.performed) {
-            Debug.Log("Click Called");
         }
     }
     public void OnMove(InputAction.CallbackContext context) {

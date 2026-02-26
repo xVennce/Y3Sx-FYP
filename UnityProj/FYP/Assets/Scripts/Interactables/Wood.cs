@@ -7,7 +7,11 @@ public class Wood : InteractionBase {
     protected override void Update() {
     }
     protected override void HandleInteract() {
-        Debug.Log("Interacted with wood");
-        inventory.IncrementWood(1);
+        if (isInteractable) {
+            Debug.Log("Interacted with wood");
+            isInteractable = false;
+            inventory.IncrementWood(1);
+            DeleteSelf(destroyDelay);
+        }
     }
 }
