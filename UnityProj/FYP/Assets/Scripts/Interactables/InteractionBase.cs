@@ -13,6 +13,8 @@ public abstract class InteractionBase : MonoBehaviour {
 
     [Header("Toggle Interactability")]
     [SerializeField] protected bool isInteractable = true;
+
+    private Coroutine fadeAndDestroy;
     protected abstract void Start();
     protected abstract void Update();
     protected virtual void OnEnable() {
@@ -37,9 +39,28 @@ public abstract class InteractionBase : MonoBehaviour {
     }
     protected abstract void HandleInteract();
     protected virtual void DeleteSelf(float time = 1f) {
-        Destroy(gameObject, time);
+        fadeAndDestroy = StartCoroutine(FadeAndDestroy(time));
     }
+    private IEnumerator FadeAndDestroy(float duration) {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
+        if (sr == null) {
+            Destroy(gameObject, duration);
+            yield break;
+        }
+
+        Color startColor = sr.color;
+        float elapsed = 0f;
+
+        while (elapsed < duration) {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(startColor.a, 0f, elapsed / duration);
+            sr.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
     protected virtual void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
             player.OnInteractPressed -= HandleInteract;

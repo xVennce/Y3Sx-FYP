@@ -41,7 +41,6 @@ public class NPCDialogue : MonoBehaviour {
                 currentQuest = QuestType.Wood;
                 questFinished = false;
                 break;
-
             case QuestType.Wood:
                 if (!questFinished) {
                     dialogueText.text = dialogueLines[1];
@@ -70,7 +69,8 @@ public class NPCDialogue : MonoBehaviour {
                 }
                 else {
                     dialogueText.text = dialogueLines[6];
-                    currentQuest = QuestType.None;
+                    //currentQuest = QuestType.None;
+                    //this NPC has no more quests, so we can just leave it at that
                 }
                 break;
         }
