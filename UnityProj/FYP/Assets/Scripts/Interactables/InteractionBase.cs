@@ -17,10 +17,11 @@ public abstract class InteractionBase : MonoBehaviour {
     protected abstract void Update();
     protected virtual void OnEnable() {
         GetPlayerReference();
-        player.OnInteractPressed += HandleInteract;
     }
     protected virtual void OnDisable() {
-        player.OnInteractPressed -= HandleInteract;
+        if (player != null) {
+            player.OnInteractPressed -= HandleInteract;
+        }
     }
     protected void GetPlayerReference() {
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
@@ -36,13 +37,18 @@ public abstract class InteractionBase : MonoBehaviour {
     }
     protected abstract void HandleInteract();
     protected virtual void DeleteSelf(float time = 1f) {
-        player.OnInteractPressed -= HandleInteract;
         Destroy(gameObject, time);
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
+            player.OnInteractPressed -= HandleInteract;
             player.OnInteractPressed += HandleInteract;
+        }
+    }
+    protected virtual void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Player")) {
+            player.OnInteractPressed -= HandleInteract;
         }
     }
 }
