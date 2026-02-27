@@ -70,7 +70,7 @@ public class NPCDialogue : MonoBehaviour {
                 else {
                     dialogueText.text = dialogueLines[6];
                     //currentQuest = QuestType.None;
-                    //this NPC has no more quests, so we can just leave it at that
+                    //this NPC has no more quests
                 }
                 break;
         }
