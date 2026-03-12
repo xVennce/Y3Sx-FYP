@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 26016256}
   - component: {fileID: 26016255}
   m_Layer: 0
-  m_Name: Herb
+  m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
 --- !u!70 &26016256
@@ -310,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
 --- !u!70 &38046186
@@ -16161,7 +16163,7 @@ MonoBehaviour:
   dialogueLines:
   - Hi! Can you fetch me some ingredients for tea?
   - I need 5 pieces of wood for the fire...
-  - Thank you for the wood! Now I need 5 herbs.
+  - Thank you for the wood! Now I need 3 herbs.
   - I need you to pick 3 herbs for the tea...
   - These herbs will help. Now fetch water for me.
   - I need water for the pot...
@@ -18217,6 +18219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.25
   frequency: 5
+  randomizeStart: 0
 --- !u!1 &688414444
 GameObject:
   m_ObjectHideFlags: 0
@@ -23247,6 +23250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
 --- !u!212 &1858478575
@@ -23679,6 +23683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
 --- !u!212 &1981424230
@@ -24229,6 +24234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
 --- !u!212 &2125332354
@@ -25077,6 +25083,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6927562778550208621}
+  - {fileID: 6866765990172280144}
   m_Father: {fileID: 944706237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5458403035968941969
@@ -25093,6 +25100,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6927562778545108942}
+  - {fileID: 6866765990158531315}
   m_Father: {fileID: 944706237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5458403036231025685
@@ -25109,6 +25117,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6927562778819910730}
+  - {fileID: 6866765990433165687}
   m_Father: {fileID: 944706237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5458403036545287922
@@ -25125,6 +25134,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6927562779167792813}
+  - {fileID: 6866765989682631568}
   m_Father: {fileID: 944706237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5458403036964526366
@@ -25141,6 +25151,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6927562779555430721}
+  - {fileID: 6866765989029694588}
   m_Father: {fileID: 944706237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5535753532337422045
@@ -25154,6 +25165,7 @@ GameObject:
   - component: {fileID: 6927562778550208621}
   - component: {fileID: 6102380107465742530}
   - component: {fileID: 6993509561640702263}
+  - component: {fileID: 6993509561640702264}
   - component: {fileID: 6271930651746277798}
   m_Layer: 0
   m_Name: Wood
@@ -25173,6 +25185,7 @@ GameObject:
   - component: {fileID: 6927562778545108942}
   - component: {fileID: 6102380107454080865}
   - component: {fileID: 6993509561629306516}
+  - component: {fileID: 6993509561629306517}
   - component: {fileID: 6271930651757946373}
   m_Layer: 0
   m_Name: Wood
@@ -25192,6 +25205,7 @@ GameObject:
   - component: {fileID: 6927562778819910730}
   - component: {fileID: 6102380107191848165}
   - component: {fileID: 6993509561904071952}
+  - component: {fileID: 6993509561904071953}
   - component: {fileID: 6271930651479100801}
   m_Layer: 0
   m_Name: Wood
@@ -25211,6 +25225,7 @@ GameObject:
   - component: {fileID: 6927562779555430721}
   - component: {fileID: 6102380108470637038}
   - component: {fileID: 6993509562780145691}
+  - component: {fileID: 6993509562780145692}
   - component: {fileID: 6271930652884603018}
   m_Layer: 0
   m_Name: Wood
@@ -25230,6 +25245,7 @@ GameObject:
   - component: {fileID: 6927562779167792813}
   - component: {fileID: 6102380107514531330}
   - component: {fileID: 6993509562663028727}
+  - component: {fileID: 6993509562663028728}
   - component: {fileID: 6271930653001846630}
   m_Layer: 0
   m_Name: Wood
@@ -25252,6 +25268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
 --- !u!212 &6102380107191848165
@@ -25739,11 +25756,11 @@ Transform:
   m_GameObject: {fileID: 3953470055748645575}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.988, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 1.494, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6927562779555430721}
+  m_Father: {fileID: 5458403036964526366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6866765989682631568
 Transform:
@@ -25754,11 +25771,11 @@ Transform:
   m_GameObject: {fileID: 3953470054793194795}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.988, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 1.494, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6927562779167792813}
+  m_Father: {fileID: 5458403036545287922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6866765990158531315
 Transform:
@@ -25769,11 +25786,11 @@ Transform:
   m_GameObject: {fileID: 3953470056770438216}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.988, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 1.494, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6927562778545108942}
+  m_Father: {fileID: 5458403035968941969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6866765990172280144
 Transform:
@@ -25784,11 +25801,11 @@ Transform:
   m_GameObject: {fileID: 3953470056756689899}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.988, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 1.494, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6927562778550208621}
+  m_Father: {fileID: 5458403035955171378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6866765990433165687
 Transform:
@@ -25799,11 +25816,11 @@ Transform:
   m_GameObject: {fileID: 3953470056491610060}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.988, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: 0, y: 1.494, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6927562778819910730}
+  m_Father: {fileID: 5458403036231025685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6927562778545108942
 Transform:
@@ -25817,8 +25834,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6866765990158531315}
+  m_Children: []
   m_Father: {fileID: 5458403035968941969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6927562778550208621
@@ -25833,8 +25849,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6866765990172280144}
+  m_Children: []
   m_Father: {fileID: 5458403035955171378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6927562778819910730
@@ -25849,8 +25864,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6866765990433165687}
+  m_Children: []
   m_Father: {fileID: 5458403036231025685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6927562779167792813
@@ -25865,8 +25879,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6866765989682631568}
+  m_Children: []
   m_Father: {fileID: 5458403036545287922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6927562779555430721
@@ -25881,8 +25894,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6866765989029694588}
+  m_Children: []
   m_Father: {fileID: 5458403036964526366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6993509561629306516
@@ -25899,8 +25911,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
+--- !u!114 &6993509561629306517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535753532349071742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3441fc5d03d694f93f7b8fe01d562c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.1
+  frequency: 4
+  randomizeStart: 1
 --- !u!114 &6993509561640702263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25915,8 +25943,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
+--- !u!114 &6993509561640702264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535753532337422045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3441fc5d03d694f93f7b8fe01d562c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.1
+  frequency: 4
+  randomizeStart: 1
 --- !u!114 &6993509561904071952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25931,8 +25975,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
+--- !u!114 &6993509561904071953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535753532611144442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3441fc5d03d694f93f7b8fe01d562c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.1
+  frequency: 4
+  randomizeStart: 1
 --- !u!114 &6993509562663028727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25947,8 +26007,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
+--- !u!114 &6993509562663028728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535753534133397533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3441fc5d03d694f93f7b8fe01d562c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.1
+  frequency: 4
+  randomizeStart: 1
 --- !u!114 &6993509562780145691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25963,8 +26039,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventory: {fileID: 0}
+  arrow: {fileID: 0}
   destroyDelay: 1
   isInteractable: 1
+--- !u!114 &6993509562780145692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5535753533480990705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3441fc5d03d694f93f7b8fe01d562c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.1
+  frequency: 4
+  randomizeStart: 1
 --- !u!70 &7164138551187464843
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

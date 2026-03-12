@@ -8,6 +8,9 @@ public abstract class InteractionBase : MonoBehaviour {
     [Header("Inventory Refererence")]
     [SerializeField] protected PlayerInventory inventory;
 
+    [Header("Arrow Refererence")]
+    [SerializeField] protected GameObject arrow;
+
     [Header("Time Delay for Destroy After Interaction")]
     [SerializeField] protected float destroyDelay = 1f;
 
@@ -19,6 +22,7 @@ public abstract class InteractionBase : MonoBehaviour {
     protected abstract void Update();
     protected virtual void OnEnable() {
         GetPlayerReference();
+        GetArrowReference();
     }
     protected virtual void OnDisable() {
         if (player != null) {
@@ -29,6 +33,11 @@ public abstract class InteractionBase : MonoBehaviour {
         GameObject temp = GameObject.FindGameObjectWithTag("Player");
         if (temp != null) {
             player = temp.GetComponent<Player>();
+        }
+    }
+    protected void GetArrowReference() {
+        if (arrow == null) {
+            arrow = transform.parent.Find("Arrow")?.gameObject;
         }
     }
     protected void GetInventoryReference() {
@@ -45,6 +54,7 @@ public abstract class InteractionBase : MonoBehaviour {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
         if (sr == null) {
+            Destroy(arrow, duration);
             Destroy(gameObject, duration);
             yield break;
         }
@@ -58,7 +68,7 @@ public abstract class InteractionBase : MonoBehaviour {
             sr.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
             yield return null;
         }
-
+        Destroy(arrow);
         Destroy(gameObject);
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision) {
