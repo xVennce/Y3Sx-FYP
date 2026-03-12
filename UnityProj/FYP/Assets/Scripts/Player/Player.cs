@@ -16,24 +16,39 @@ public class Player : MonoBehaviour,
     [SerializeField] private float groundCheckDistance = 0.05f;
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Animator references")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject spriteObject;
+
     [Header("Events")]
     public System.Action OnInteractPressed;
 
 #region Private Variables
     private PlayerControls controls;
+
     private Rigidbody2D rb;
+     
+    private string currentAnimation = "";
 
     private Vector2 moveInput;
+
     private float currentSpeed;
 
     private bool isPaused;
+    private bool isSprinting;
 #endregion
     private void Awake() {
         controls = new PlayerControls();
         controls.Player.SetCallbacks(this);
         controls.Ui.SetCallbacks(this);
+
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
+        spriteObject = GetComponentInChildren<SpriteRenderer>().gameObject;
+
         currentSpeed = moveSpeed;
+        //default animation state
+        ChangeAnimation("idle");
     }
     private void OnEnable() {
         SwitchToPlayerActionMap();
@@ -43,11 +58,55 @@ public class Player : MonoBehaviour,
     }
     private void Update() {
         GroundedCheck();
+        CheckAnimation();
     }
     private void FixedUpdate() {
         HandleMovement();
     }
+    private void CheckAnimation() {
+        FlipSpriteDependingOnDirection();
+        //Idle anims
+        //for some reason the player is still moving a little bit when idle, so I added a small threshold to prevent the animation from switching to run
+        Vector2 velocity = rb.linearVelocity;
+        float speed = Mathf.Abs(velocity.x);
 
+        //Air animations first
+        if (!isGrounded) {
+            if (rb.linearVelocity.y > 0.1f) {
+                ChangeAnimation("jump");
+            }
+            else if (rb.linearVelocity.y < -0.1f) {
+                ChangeAnimation("fall");
+            }
+            animator.speed = 1f;
+            return;
+        }
+
+        //Ground animations
+        if (speed < 0.2f) {
+            animator.speed = 1f;
+            ChangeAnimation("idle");
+        }
+        else {
+            animator.speed = isSprinting ? sprintMultiplier : 1f;
+            ChangeAnimation("run");
+        }
+    }
+    private void FlipSpriteDependingOnDirection() {
+        if (moveInput.x > 0) {
+            spriteObject.transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (moveInput.x < 0) {
+            spriteObject.transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+    private void ChangeAnimation(string newAnimation,float crossFade = 0.1f) {
+        if (currentAnimation == newAnimation) {
+            return;
+        }
+        currentAnimation = newAnimation;
+        animator.CrossFade(newAnimation, crossFade);
+    }
     private void HandleMovement() {
         rb.linearVelocity = new Vector2(
             moveInput.x * currentSpeed,
@@ -122,8 +181,10 @@ public class Player : MonoBehaviour,
     }
     public void OnSprint(InputAction.CallbackContext context) {
         if (context.performed) {
+            isSprinting = true;
             currentSpeed = moveSpeed * sprintMultiplier;
         } else if (context.canceled) {
+            isSprinting = false;
             currentSpeed = moveSpeed;
         }
     }
