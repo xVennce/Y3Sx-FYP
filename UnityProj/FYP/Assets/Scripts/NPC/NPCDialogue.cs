@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
 public class NPCDialogue : MonoBehaviour {
     [Header("Player Refererence")]
     [SerializeField] private Player player;
+
+    [Header("Audio Settings")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private float dialogueVolume = 1.0f;
 
     [Header("Dialogue Settings")]
     [SerializeField] private List<string> dialogueLines;
@@ -28,7 +33,8 @@ public class NPCDialogue : MonoBehaviour {
 #endregion
     private void Start() {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = dialogueVolume;
         originalPosition = dialogueRect.anchoredPosition;
         canvasGroup.alpha = 0f;
     }
@@ -74,6 +80,7 @@ public class NPCDialogue : MonoBehaviour {
                 }
                 break;
         }
+        PlayDialogueAudio();
     }
     public void MarkQuestAsFinished() {
         questFinished = true;
@@ -106,6 +113,12 @@ public class NPCDialogue : MonoBehaviour {
         Debug.Log("Interacted with NPC");
         CheckCurrentQuest();
     }
+    private void PlayDialogueAudio() {
+        if (audioSource != null) {
+            audioSource.Play();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
             player.OnInteractPressed -= HandleInteract;
