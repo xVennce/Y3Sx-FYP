@@ -8,6 +8,11 @@ public abstract class InteractionBase : MonoBehaviour {
     [Header("Inventory Refererence")]
     [SerializeField] protected PlayerInventory inventory;
 
+    [Header("Audio Refererence")]
+    [SerializeField] protected AudioSource pickupAudio;
+    [SerializeField] protected AudioClip pickupClip;
+    [SerializeField] protected float pickupVolume = 0.5f;
+
     [Header("Arrow Refererence")]
     [SerializeField] protected GameObject arrow;
 
@@ -20,9 +25,11 @@ public abstract class InteractionBase : MonoBehaviour {
     private Coroutine fadeAndDestroy;
     protected abstract void Start();
     protected abstract void Update();
+    
     protected virtual void OnEnable() {
         GetPlayerReference();
         GetArrowReference();
+        pickupAudio = GetComponent<AudioSource>();
     }
     protected virtual void OnDisable() {
         if (player != null) {
@@ -46,8 +53,12 @@ public abstract class InteractionBase : MonoBehaviour {
             inventory = temp.GetComponent<PlayerInventory>();
         }
     }
+    protected virtual void PlayPickupAudio() {
+        pickupAudio.PlayOneShot(pickupClip, pickupVolume);
+    }
     protected abstract void HandleInteract();
     protected virtual void DeleteSelf(float time = 1f) {
+        pickupAudio.PlayOneShot(pickupClip, pickupVolume);
         fadeAndDestroy = StartCoroutine(FadeAndDestroy(time));
     }
     private IEnumerator FadeAndDestroy(float duration) {
