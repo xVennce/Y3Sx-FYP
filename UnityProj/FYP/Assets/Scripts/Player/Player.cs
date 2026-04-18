@@ -10,6 +10,9 @@ public class Player : MonoBehaviour,
     [SerializeField] private float sprintMultiplier = 1.5f;
     [SerializeField] private float jumpForce = 15.0f;
 
+    [Header("Player jump audio")]
+    [SerializeField] private PlayerAudio playerAudio;
+
     [Header("Ground Check")]
     [SerializeField] private bool isGrounded = false;
     [SerializeField] private float groundedCheckDistance;
@@ -45,6 +48,8 @@ public class Player : MonoBehaviour,
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         spriteObject = GetComponentInChildren<SpriteRenderer>().gameObject;
+
+        playerAudio = GetComponentInChildren<PlayerAudio>();
 
         currentSpeed = moveSpeed;
         //default animation state
@@ -115,6 +120,7 @@ public class Player : MonoBehaviour,
     }
     private void HandleJump() {
         if (isGrounded) {
+            playerAudio.PlayJumpSound();
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
