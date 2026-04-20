@@ -85,6 +85,8 @@ public class Player : MonoBehaviour,
     }
     private void FixedUpdate() {
         if (isPaused) {
+            ChangeAnimation("idle");
+            rb.linearVelocity = Vector2.zero;
             return;
         }
         HandleMovement();

@@ -305,6 +305,7 @@ MonoBehaviour:
   destroyDelay: 1
   nextGameObject: {fileID: 0}
   isInteractable: 1
+  waterMiniGame: {fileID: 0}
 --- !u!70 &26016256
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -19415,6 +19416,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 2105499707}
   moveAmount: 25
   animationDuration: 0.4
+  isPaused: 0
 --- !u!50 &575092434
 Rigidbody2D:
   serializedVersion: 5
@@ -19627,7 +19629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &686835224
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22143,6 +22145,8 @@ MonoBehaviour:
   nextGameObject: {fileID: 1128976612}
   isInteractable: 1
   interactionAmount: 0
+  wood: []
+  parent: {fileID: 0}
 --- !u!1 &1118513431
 GameObject:
   m_ObjectHideFlags: 0
@@ -26244,6 +26248,8 @@ MonoBehaviour:
   nextGameObject: {fileID: 135367805}
   isInteractable: 1
   interactionAmount: 0
+  wood: []
+  parent: {fileID: 0}
 --- !u!82 &2127944946
 AudioSource:
   m_ObjectHideFlags: 0
