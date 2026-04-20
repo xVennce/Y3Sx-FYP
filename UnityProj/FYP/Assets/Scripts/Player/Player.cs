@@ -1,6 +1,7 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 public class Player : MonoBehaviour,
     PlayerControls.IPlayerActions, 
     PlayerControls.IUiActions {
@@ -22,6 +23,19 @@ public class Player : MonoBehaviour,
     [Header("Animator references")]
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject spriteObject;
+
+    [Header("Dialogue UI")]
+    [SerializeField] private TextMeshProUGUI dialogueText;
+
+    [Header("UI Animation Settings")]
+    [SerializeField] private float duration = 3f;
+    [SerializeField] private RectTransform dialogueRect;
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private float moveAmount = 150f;
+    [SerializeField] private float animationDuration = 0.4f;
+
+    private Vector2 originalPosition;
+    private Coroutine moveCoroutine;
 
     [Header("Events")]
     public System.Action OnInteractPressed;
@@ -50,6 +64,9 @@ public class Player : MonoBehaviour,
         spriteObject = GetComponentInChildren<SpriteRenderer>().gameObject;
 
         playerAudio = GetComponentInChildren<PlayerAudio>();
+
+        originalPosition = dialogueRect.anchoredPosition;
+        canvasGroup.alpha = 0f;
 
         currentSpeed = moveSpeed;
         //default animation state
@@ -143,6 +160,43 @@ public class Player : MonoBehaviour,
 
         isGrounded = hit.collider != null;
     }
+    public void ShowDialogueForXTime(string message) {
+        dialogueText.text = message;
+        if (moveCoroutine != null) {
+            StopCoroutine(moveCoroutine);
+        }
+        moveCoroutine = StartCoroutine(AnimateUI(true));
+        StartCoroutine(HideDialogueAfterTime(duration));
+    }
+    private IEnumerator HideDialogueAfterTime(float duration) {
+        yield return new WaitForSeconds(duration);
+        moveCoroutine = StartCoroutine(AnimateUI(false));
+    }
+    private IEnumerator AnimateUI(bool fadeIn) {
+        float elapsed = 0f;
+
+        Vector2 startPos = dialogueRect.anchoredPosition;
+        Vector2 targetPos = fadeIn ? originalPosition + Vector2.up * moveAmount : originalPosition;
+
+        float startAlpha = canvasGroup.alpha;
+        float targetAlpha = fadeIn ? 1f : 0f;
+
+        while (elapsed < animationDuration) {
+            elapsed += Time.deltaTime;
+            float t = elapsed / animationDuration;
+
+            t = Mathf.SmoothStep(0, 1, t);
+
+            dialogueRect.anchoredPosition = Vector2.Lerp(startPos, targetPos, t);
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+
+            yield return null;
+        }
+
+        dialogueRect.anchoredPosition = targetPos;
+        canvasGroup.alpha = targetAlpha;
+    }
+
     private void SwitchToPlayerActionMap() {
         controls.Ui.Disable();
         controls.Player.Enable();
@@ -152,7 +206,7 @@ public class Player : MonoBehaviour,
         controls.Ui.Enable();
 
     }
-
+    
     private void OnDrawGizmosSelected() {
         BoxCollider2D box = GetComponent<BoxCollider2D>();
         if (box == null) return;
