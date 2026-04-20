@@ -162,6 +162,7 @@ public class Player : MonoBehaviour,
     }
     public void ShowDialogueForXTime(string message) {
         dialogueText.text = message;
+        playerAudio.PlayTalkSound();
         if (moveCoroutine != null) {
             StopCoroutine(moveCoroutine);
         }
