@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class QuestTracker : MonoBehaviour {
     [Header("Tracked Quest Totals")]
@@ -12,6 +11,11 @@ public class QuestTracker : MonoBehaviour {
     [SerializeField] private List<GameObject> woodObjects;
     [SerializeField] private List<GameObject> herbObjects;
     [SerializeField] private List<GameObject> waterObjects;
+
+    [Header("Level identifier")]
+    [SerializeField] private bool isLevelOne;
+    [SerializeField] private bool isLevelTwo;
+    [SerializeField] private bool isLevelThree;
 
     private NPCDialogue npcQuest;
     private PlayerInventory inventory;
