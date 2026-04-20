@@ -33,7 +33,7 @@ public class QuestTracker : MonoBehaviour {
                 SetQuestItemsActiveEasy();
                 break;
             case GlobalVariables.CurrentLevel.Level_Two:
-
+                SetQuestItemsActiveEasy();
                 break;
             case GlobalVariables.CurrentLevel.Level_Three:
 

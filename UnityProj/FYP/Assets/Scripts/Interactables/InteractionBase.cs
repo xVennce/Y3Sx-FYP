@@ -19,6 +19,9 @@ public abstract class InteractionBase : MonoBehaviour {
     [Header("Time Delay for Destroy After Interaction")]
     [SerializeField] protected float destroyDelay = 1f;
 
+    [Header("Enable next gameobject after deletion")]
+    [SerializeField] protected GameObject nextGameObject;
+
     [Header("Toggle Interactability")]
     [SerializeField] protected bool isInteractable = true;
 
@@ -58,6 +61,9 @@ public abstract class InteractionBase : MonoBehaviour {
     }
     protected abstract void HandleInteract();
     protected virtual void DeleteSelf(float time = 1f) {
+        if (nextGameObject != null) {
+            nextGameObject.SetActive(true);
+        }
         pickupAudio.PlayOneShot(pickupClip, pickupVolume);
         fadeAndDestroy = StartCoroutine(FadeAndDestroy(time));
     }
@@ -79,6 +85,7 @@ public abstract class InteractionBase : MonoBehaviour {
             sr.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
             yield return null;
         }
+
         Destroy(arrow);
         Destroy(gameObject);
     }

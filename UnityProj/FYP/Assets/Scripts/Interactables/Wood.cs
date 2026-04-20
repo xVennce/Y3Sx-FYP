@@ -1,5 +1,6 @@
 using UnityEngine;
 public class Wood : InteractionBase {
+    [SerializeField] private int interactionAmount = 0;
     protected override void Start() {
         GetPlayerReference();
         GetInventoryReference();
@@ -18,6 +19,16 @@ public class Wood : InteractionBase {
             DeleteSelf(destroyDelay);
         }
     }
+    private void IncremementCheckLevel2() {
+        interactionAmount++;
+        if (interactionAmount > 2) {
+            IncrementCheck();
+        }
+        else {
+            inventory.IncrementWood(1);
+            PlayPickupAudio();
+        }
+    }
     private void LevelCheck() {
         switch (GlobalVariables.currentLevel) {
             case GlobalVariables.CurrentLevel.Level_One:
@@ -28,7 +39,7 @@ public class Wood : InteractionBase {
                     player.ShowDialogueForXTime("I need something to chop the tree...");
                 }
                 else {
-                    IncrementCheck();
+                    IncremementCheckLevel2();
                 }
                 break;
             case GlobalVariables.CurrentLevel.Level_Three:
