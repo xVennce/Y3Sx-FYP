@@ -1,5 +1,6 @@
 using UnityEngine;
 public class Herb : InteractionBase {
+    [SerializeField] private Canvas herbMiniGame;
     protected override void Start() {
         GetPlayerReference();
         GetInventoryReference();
@@ -18,6 +19,12 @@ public class Herb : InteractionBase {
             DeleteSelf(destroyDelay);
         }
     }
+    public void HerbMinigameComplete() {
+        IncrementCheck();
+    }
+    public void PlayAudio() {
+        PlayPickupAudio();
+    }
     private void LevelCheck() {
         switch (GlobalVariables.currentLevel) {
             case GlobalVariables.CurrentLevel.Level_One:
@@ -32,7 +39,13 @@ public class Herb : InteractionBase {
                 }
                 break;
             case GlobalVariables.CurrentLevel.Level_Three:
-                //level check for level 3
+                if (inventory.hasShears == false) {
+                    player.ShowDialogueForXTime("I need something to cut this herb...");
+                }
+                else {
+                    herbMiniGame.gameObject.SetActive(true);
+                    player.isPaused = true;
+                }
                 break;
         }
     }
