@@ -12,7 +12,7 @@ public class QuestTracker : MonoBehaviour {
     [SerializeField] private List<GameObject> herbObjects;
     [SerializeField] private List<GameObject> waterObjects;
 
-    private NPCDialogue npcQuest;
+    public NPCDialogue npcQuest;
     private PlayerInventory inventory;
     private void Start() {
         inventory = GetComponent<PlayerInventory>();
@@ -25,12 +25,12 @@ public class QuestTracker : MonoBehaviour {
     }
     private void Update() {
         CheckQuestState();
-        SetQuestItemsActive();
+        CheckLevel();
     }
     private void CheckLevel() {
         switch (GlobalVariables.currentLevel) {
             case GlobalVariables.CurrentLevel.Level_One:
-
+                SetQuestItemsActiveEasy();
                 break;
             case GlobalVariables.CurrentLevel.Level_Two:
 
@@ -40,7 +40,7 @@ public class QuestTracker : MonoBehaviour {
                 break;
         }
     }
-    private void SetQuestItemsActive() {
+    private void SetQuestItemsActiveEasy() {
         if (npcQuest.currentQuest == QuestType.Wood) {
             SetListState(waterObjects, false);
             SetListState(herbObjects, false);

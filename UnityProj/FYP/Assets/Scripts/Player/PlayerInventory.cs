@@ -5,6 +5,10 @@ public class PlayerInventory : MonoBehaviour {
     public int woodCount;
     public int herbCount;
     public int waterCount;
+
+    public bool hasAxe;
+    public bool hasShears;
+    public bool hasBucket;
     public void IncrementWater(int amount) {
         waterCount += amount;
     }
