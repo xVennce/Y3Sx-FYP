@@ -25,7 +25,7 @@ public abstract class InteractionBase : MonoBehaviour {
     [Header("Toggle Interactability")]
     [SerializeField] protected bool isInteractable = true;
 
-    private Coroutine fadeAndDestroy;
+    protected Coroutine fadeAndDestroy;
     protected abstract void Start();
     protected abstract void Update();
     
@@ -67,7 +67,7 @@ public abstract class InteractionBase : MonoBehaviour {
         pickupAudio.PlayOneShot(pickupClip, pickupVolume);
         fadeAndDestroy = StartCoroutine(FadeAndDestroy(time));
     }
-    private IEnumerator FadeAndDestroy(float duration) {
+    protected IEnumerator FadeAndDestroy(float duration) {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
         if (sr == null) {

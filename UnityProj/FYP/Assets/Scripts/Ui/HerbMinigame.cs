@@ -33,7 +33,7 @@ public class HerbMinigame : MonoBehaviour {
     }
     private void CheckMinigameState() {
         if (isLeaf1Pressed && isLeaf2Pressed && isLeaf3Pressed) {
-            Debug.Log("Minigame complete");
+            Debug.Log("Herb minigame complete");
             player.isPaused = false;
             herb.HerbMinigameComplete();
             this.gameObject.SetActive(false);
