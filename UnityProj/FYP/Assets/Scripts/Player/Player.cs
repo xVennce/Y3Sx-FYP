@@ -40,7 +40,9 @@ public class Player : MonoBehaviour,
     [Header("Events")]
     public System.Action OnInteractPressed;
 
-#region Private Variables
+    public bool isPaused;
+
+    #region Private Variables
     private PlayerControls controls;
 
     private Rigidbody2D rb;
@@ -51,7 +53,6 @@ public class Player : MonoBehaviour,
 
     private float currentSpeed;
 
-    private bool isPaused;
     private bool isSprinting;
 #endregion
     private void Awake() {
@@ -83,9 +84,15 @@ public class Player : MonoBehaviour,
         CheckAnimation();
     }
     private void FixedUpdate() {
+        if (isPaused) {
+            return;
+        }
         HandleMovement();
     }
     private void CheckAnimation() {
+        if (isPaused) {
+            return;
+        }
         FlipSpriteDependingOnDirection();
         //Idle anims
         //for some reason the player is still moving a little bit when idle, so I added a small threshold to prevent the animation from switching to run
@@ -136,7 +143,7 @@ public class Player : MonoBehaviour,
             );
     }
     private void HandleJump() {
-        if (isGrounded) {
+        if (isGrounded && !isPaused) {
             playerAudio.PlayJumpSound();
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }

@@ -43,7 +43,12 @@ public class Wood : InteractionBase {
                 }
                 break;
             case GlobalVariables.CurrentLevel.Level_Three:
-                //level check for level 3
+                if (inventory.hasAxe == false) {
+                    player.ShowDialogueForXTime("I need something to chop the tree...");
+                }
+                else {
+                    //do something here
+                }
                 break;
         }
     }
