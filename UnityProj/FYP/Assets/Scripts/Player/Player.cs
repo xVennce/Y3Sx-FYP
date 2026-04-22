@@ -34,6 +34,9 @@ public class Player : MonoBehaviour,
     [SerializeField] private float moveAmount = 150f;
     [SerializeField] private float animationDuration = 0.4f;
 
+    [Header("Ui References")]
+    [SerializeField] private Canvas pauseMenuCanvas;
+
     private Vector2 originalPosition;
     private Coroutine moveCoroutine;
 
@@ -182,6 +185,12 @@ public class Player : MonoBehaviour,
         yield return new WaitForSeconds(duration);
         moveCoroutine = StartCoroutine(AnimateUI(false));
     }
+    private void ShowPauseMenu() {
+        if (!isPaused) {
+            isPaused = true;
+        }
+        pauseMenuCanvas.gameObject.SetActive(true);
+    }
     private IEnumerator AnimateUI(bool fadeIn) {
         float elapsed = 0f;
 
@@ -258,6 +267,9 @@ public class Player : MonoBehaviour,
             currentSpeed = moveSpeed;
         }
     }
+    public void OnPause(InputAction.CallbackContext context) {
+        ShowPauseMenu();
+    }
     #endregion
     #region Ui Inputs
     public void OnNavigate(InputAction.CallbackContext context) {
@@ -299,5 +311,5 @@ public class Player : MonoBehaviour,
     public void OnTrackedDeviceOrientation(InputAction.CallbackContext context) {
         throw new System.NotImplementedException();
     }
-#endregion
+    #endregion
 }
